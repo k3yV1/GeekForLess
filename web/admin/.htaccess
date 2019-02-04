@@ -1,0 +1,6 @@
+<Files admin.php> 
+AuthType Basic 
+AuthName "Private zone. Only for administrator!" 
+AuthUserFile  C:\OSPanel\domains\localhost\BookCatalog\web\admin\.htpasswd
+require valid-user 
+</Files>
