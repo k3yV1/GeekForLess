@@ -1,10 +1,3 @@
-<?php
-$link = mysqli_connect('localhost', 'mysql', 'mysql','BookCatalog');
-
-if(!$link){
-  echo "ERROR!";
-}
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,23 +5,13 @@ if(!$link){
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<?php
-  function tableBook()
-  {
-    global $link;
-    $sql = "SELECT * FROM table_book AS A JOIN table_authorsOfBook AS B ON A.IdBook = B.IdBook JOIN table_authors AS C ON B.IdAuthor = C.IdAuthor
-    WHERE A.IdBook = B.IdAuthor";
-    $result = mysqli_query($link, $sql);
-    $authors = mysqli_fetch_all($result, MYSQL_ASSOC);
-
-    return $authors;
-  }
-?>
 </head>
 <body>
   <div class="container">
 <br/>
-<?php $aut = tableBook(); ?>
+<?php 
+require_once 'function.php';
+$aut = tableBook(); ?>
 <?php foreach ($aut as $authors): ?>
 <div class="row">
       <div class="col-md-3">

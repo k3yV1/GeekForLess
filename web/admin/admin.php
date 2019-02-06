@@ -6,7 +6,13 @@
 </head>
     <body>
       <?php
+      		$adress = $_POST['Adress'];
+      		$fullname = $_POST['full_name'];
+      		$count = $_POST['count'];
 
+      		echo 'Адресс: '.$adress.'<br>';
+          echo 'Имя Фамилия: '.$fullname.'<br>';
+          echo 'Количество: '.$count;
         ?>
         <div class="add">
            <a href="add.php">Добавити запис</a>

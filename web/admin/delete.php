@@ -5,60 +5,8 @@
 </head>
 <body>
 <?php
-//require_once 'connection.php'; // подключаем скрипт
-// подключаемся к серверу
 $conn = mysqli_connect('localhost', 'mysql', 'mysql','BookCatalog') or die("Ошибка " . mysqli_error($link));
-// if(isset($_POST['send'])){
 
-
-//     // экранирования символов для mysql
-//     /*$IdBook = trim($_POST['IdBook']);
-//     $IdBook = mysqli_real_escape_string($conn, $IdBook);
-//     $BookName = trim($_POST['BookName']);
-//     $BookName = mysqli_real_escape_string($conn, $BookName);
-//     $Description = trim($_POST['Description']);
-//     $Description = mysqli_real_escape_string($conn, $Description);
-//     $Price = trim($_POST['Price']);
-//     $Price = mysqli_real_escape_string($conn, $Price);*/
-
-
-    
-//     // выполняем запрос
-//     $result = mysqli_query($conn,  "INSERT INTO table_book VALUES('{$_POST["IdBook"]} ','{$_POST["BookName"]} ','{$_POST["Description"]} ','{$_POST["Price"]} ')");
-//     if($result)
-//     {
-//         echo "<span style='color:red;'>Данные добавлены</span>";
-//     }
-//     // закрываем подключение
-
-// }
-// if(isset($_POST['send'])){
-//     // выполняем запрос
-//     $result = mysqli_query($conn, "INSERT INTO table_authorsOfBook (IdBook, IdAuthor)
-// VALUES('{$_POST["IdBook"]} ','{$_POST["IdAuthor"]} ')") ;
-//     if($result)
-//     {
-//         echo "<span style='color:red;'>Данные добавлены</span><br>";
-//     }
-//     // закрываем подключение
-   
-// }
-// if(isset($_POST['send'])){
-//     // экранирования символов для mysql
-//     global $conn;
-
-     
-
-//     // выполняем запрос
-//     $result = mysqli_query($conn,"INSERT INTO table_authors (IdAuthor, AuthorName)
-//  VALUES('{$_POST["IdAuthor"]} ','{$_POST["IdAuthorName"]} ')");
-//     if($result)
-//     {
-//         echo "<span style='color:red;'>Данные добавлены</span><br>";
-//     }
-//     // закрываем подключение
- 
-// }
 if(isset($_POST['send'])){
     // экранирования символов для mysql
     global $conn;
