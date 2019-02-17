@@ -1,40 +1,37 @@
 <?php
+class Test{
  function connectionToDB()
-{
-	include 'config.php';
 
-	$conn = new mysqli(LOCALHOST,USER,PASSWORD,DATABASENAME);
-	return $conn;
+{
+    include 'config.php';
+    $conn = new mysqli(LOCALHOST,USER,PASSWORD,DATABASENAME);
+    return $conn;
 }
+
 function tableBook()
   {
-    $link = connectionToDB();
+    $link = $this->connectionToDB();
     $sql = "SELECT * FROM table_book AS A JOIN table_authorsOfBook AS B ON A.IdBook = B.IdBook JOIN table_authors AS C ON B.IdAuthor = C.IdAuthor
     WHERE A.IdBook = B.IdAuthor";
     $result = mysqli_query($link, $sql);
-    $authors = mysqli_fetch_all($result, MYSQL_ASSOC);
-
+    $authors = mysqli_fetch_all($result, MYSQLI_ASSOC);
     return $authors;
   }
       function tableGetComponent($book_id)
     {
-
     
     $book_id = $_GET['authors_id'];
-
     if(!is_numeric($book_id)) exit();
-
-        $link = connectionToDB();
+        $link = $this->connectionToDB();
         $sql = "SELECT * FROM table_book AS A JOIN table_authorsOfBook AS B ON A.IdBook = B.IdBook JOIN table_authors AS C ON B.IdAuthor = C.IdAuthor 
         WHERE B.IdAuthor =  $book_id";
         $result = mysqli_query($link, $sql);
-        $authors = mysqli_fetch_all($result, MYSQL_ASSOC);
-
+        $authors = mysqli_fetch_all($result, MYSQLI_ASSOC);
         return $authors;
     }
     function AddElements()
     {
-    	$conn = connectionToDB();
+        $conn = connectionToDB();
 if(isset($_POST['send'])){
     
     $result = mysqli_query($conn,  "INSERT INTO table_book VALUES('{$_POST["IdBook"]} ','{$_POST["BookName"]} ','{$_POST["Description"]} ','{$_POST["Price"]} ')");
@@ -52,18 +49,15 @@ VALUES('{$_POST["IdBook"]} ','{$_POST["IdAuthor"]} ')") ;
     {
         echo "<span style='color:red;'>Данные добавлены</span><br>";
     }
-
    
 }
 if(isset($_POST['send'])){
-
     $result = mysqli_query($conn,"INSERT INTO table_authors (IdAuthor, AuthorName)
  VALUES('{$_POST["IdAuthor"]} ','{$_POST["AuthorName"]} ')");
     if($result)
     {
         echo "<span style='color:red;'>Данные добавлены</span><br>";
     }
-
  
 }
 if(isset($_POST['send'])){
@@ -85,8 +79,8 @@ if(isset($_POST['send'])){
     {
         echo "<span style='color:red;'>Данные добавлены</span>";
     }
-
  
 }
     }
+}
 ?>

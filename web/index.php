@@ -10,9 +10,10 @@
   <div class="container">
 <br/>
 <?php 
-require_once 'function.php';
-$aut = tableBook(); ?>
-<?php foreach ($aut as $authors): ?>
+require_once 'function.php'; 
+$aut = new Test;
+$authorsResult = $aut->tableBook();?>
+<?php foreach ($authorsResult as $authors): ?>
 <div class="row">
       <div class="col-md-3">
         <a href="#" class="thumbnail">
