@@ -4,7 +4,8 @@ class Test{
 
 {
     include 'config.php';
-    $conn = new mysqli(LOCALHOST,USER,PASSWORD,DATABASENAME);
+    $conn = mysql_connect(LOCALHOST,USER,PASSWORD,DATABASENAME);
+    mysql_select_db('BookCatalog');
     return $conn;
 }
 
@@ -13,10 +14,16 @@ function tableBook()
     $link = $this->connectionToDB();
     $sql = "SELECT * FROM table_book AS A JOIN table_authorsOfBook AS B ON A.IdBook = B.IdBook JOIN table_authors AS C ON B.IdAuthor = C.IdAuthor
     WHERE A.IdBook = B.IdAuthor";
-    $result = mysqli_query($link, $sql);
-    $authors = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    return $authors;
+    $query = mysql_query($sql);
+    $result = array();
+    $index = 0;
+    while($row = mysql_fetch_assoc($query)){
+        $result[$index] = $row;
+        $index++;
+    }
+    return $result;
   }
+
       function tableGetComponent($book_id)
     {
     
@@ -25,16 +32,21 @@ function tableBook()
         $link = $this->connectionToDB();
         $sql = "SELECT * FROM table_book AS A JOIN table_authorsOfBook AS B ON A.IdBook = B.IdBook JOIN table_authors AS C ON B.IdAuthor = C.IdAuthor 
         WHERE B.IdAuthor =  $book_id";
-        $result = mysqli_query($link, $sql);
-        $authors = mysqli_fetch_all($result, MYSQLI_ASSOC);
-        return $authors;
+        $query = mysql_query($sql);
+        $result = array();
+        $index = 0;
+        while($row = mysql_fetch_assoc($query)){
+            $result[$index] = $row;
+            $index++;
+        }
+        return $result;
     }
     function AddElements()
     {
         $conn = connectionToDB();
 if(isset($_POST['send'])){
     
-    $result = mysqli_query($conn,  "INSERT INTO table_book VALUES('{$_POST["IdBook"]} ','{$_POST["BookName"]} ','{$_POST["Description"]} ','{$_POST["Price"]} ')");
+    $result = mysql_query($conn,  "INSERT INTO table_book VALUES('{$_POST["IdBook"]} ','{$_POST["BookName"]} ','{$_POST["Description"]} ','{$_POST["Price"]} ')");
     if($result)
     {
         echo "<span style='color:red;'>Данные добавлены</span>";
@@ -43,16 +55,16 @@ if(isset($_POST['send'])){
 }
 if(isset($_POST['send'])){
  
-    $result = mysqli_query($conn, "INSERT INTO table_authorsOfBook (IdBook, IdAuthor)
+    $query = mysql_query("INSERT INTO table_authorsOfBook (IdBook, IdAuthor)
 VALUES('{$_POST["IdBook"]} ','{$_POST["IdAuthor"]} ')") ;
-    if($result)
+    if($query)
     {
         echo "<span style='color:red;'>Данные добавлены</span><br>";
     }
    
 }
 if(isset($_POST['send'])){
-    $result = mysqli_query($conn,"INSERT INTO table_authors (IdAuthor, AuthorName)
+    $result = mysql_query($conn,"INSERT INTO table_authors (IdAuthor, AuthorName)
  VALUES('{$_POST["IdAuthor"]} ','{$_POST["AuthorName"]} ')");
     if($result)
     {
@@ -62,7 +74,7 @@ if(isset($_POST['send'])){
 }
 if(isset($_POST['send'])){
   
-    $result = mysqli_query($conn,"INSERT INTO table_genre (idGenre, Genre)
+    $result = mysql_query($conn,"INSERT INTO table_genre (idGenre, Genre)
  VALUES('{$_POST["idGenre"]} ','{$_POST["Genre"]} ')");
     if($result)
     {
@@ -73,7 +85,7 @@ if(isset($_POST['send'])){
 }
 if(isset($_POST['send'])){
   
-    $result = mysqli_query($conn,"INSERT INTO table_genreOfBook (idGenre, idBook)
+    $result = mysql_query($conn,"INSERT INTO table_genreOfBook (idGenre, idBook)
  VALUES('{$_POST["idGenre"]} ','{$_POST["IdBook"]} ')");
     if($result)
     {

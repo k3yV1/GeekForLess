@@ -11,7 +11,7 @@
 <br/>
 <?php 
 require_once 'function.php'; 
-$aut = new Test;
+$aut = new Test();
 $authorsResult = $aut->tableBook();?>
 <?php foreach ($authorsResult as $authors): ?>
 <div class="row">
